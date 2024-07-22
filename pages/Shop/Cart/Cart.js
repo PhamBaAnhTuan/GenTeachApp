@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView, ScrollView, Text, TouchableOpacity, View, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "../styles";
-import { useNavigation } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import { TitleField } from "../../../Components/Components";
 import { AntDesign, Feather, Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 
 const itemPrice = 9;
 
 const Cart = ({ navigation }) => {
+    // Params
+    const route = useRoute();
+    // const cart = route.params?.cart;
     // Set icon
     const [iconName, setIconName] = useState('checkbox-blank-outline');
     const [isChecked, setIsChecked] = useState(false);
@@ -43,57 +46,64 @@ const Cart = ({ navigation }) => {
                 <ScrollView style={{ height: '83%' }} >
 
                     {/* item container */}
-                    <View style={styles.itemContainer}>
+                    {/* {cart.map((item, index) => ( */}
+                        <View style={styles.itemContainer} >
 
-                        <TitleField titleText='Durex' />
+                            <TitleField titleText='Durex' />
 
-                        {/* item in4 */}
-                        <View style={styles.itemWrap} >
-                            <TouchableOpacity onPress={onPressIcon} >
-                                <MaterialCommunityIcons name={iconName} size={24} color="black" />
-                            </TouchableOpacity>
+                            {/* item in4 */}
+                            <View style={styles.itemWrap} >
+                                <TouchableOpacity onPress={onPressIcon} >
+                                    <MaterialCommunityIcons name={iconName} size={24} color="black" />
+                                </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.itemImgContainer} >
-                                <Image source={require('../../../assets/Icon/fan.png')} resizeMode="center" style={{ height: 70, width: 70 }} />
-                            </TouchableOpacity>
+                                <TouchableOpacity style={styles.itemImgContainer} >
+                                    <Image source={require('../../../assets/item/item1.jpg')} resizeMode="contain" style={{ height: 70, width: 70 }} />
+                                </TouchableOpacity>
 
-                            <View style={styles.itemNameContainerRight}>
-                                {/* Item name container */}
-                                <View style={styles.itemNameContainer} >
-                                    <Text style={{ fontSize: 13, fontWeight: 'bold', color: 'plum' }} >
-                                        {itemPrice}$
-                                    </Text>
-                                    <Text style={{ fontSize: 13, fontWeight: 'bold' }} >
-                                        Durex Strawberry
-                                    </Text>
-                                    <Text style={{ fontSize: 10, width: '100%', textAlign: "justify" }} >
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    </Text>
+                                <View style={styles.itemNameContainerRight}>
+                                    {/* Item name container */}
+                                    <View style={styles.itemNameContainer} >
+                                        <Text style={{ fontSize: 13, fontWeight: 'bold', color: 'plum' }} >
+                                            {itemPrice}$
+                                        </Text>
+                                        <Text style={{ fontSize: 13, fontWeight: 'bold' }} >
+                                            {/* {item.name} */}
+                                        </Text>
+                                        <Text style={{ fontSize: 10, width: '100%', textAlign: "justify" }} >
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                        </Text>
+                                    </View>
+
+                                    {/* Amount btn */}
+                                    {/* <> */}
+                                    {isChecked === true
+                                        ? (<View style={styles.amountBtn} >
+                                            <TouchableOpacity onPress={subtractCount} ><Entypo name="minus" size={20} color="black" /></TouchableOpacity>
+                                            <Text style={{ width: 20, textAlign: 'center' }} >{count}</Text>
+                                            <TouchableOpacity onPress={plusCount} ><Entypo name="plus" size={20} color="black" /></TouchableOpacity>
+                                        </View>)
+                                        : <View style={styles.amountBtnHidden} ></View>
+                                    }
+                                    {/* </> */}
                                 </View>
-
-                                {/* Amount btn */}
-                                {/* <> */}
-                                {isChecked === true
-                                    ? (<View style={styles.amountBtn} >
-                                        <TouchableOpacity onPress={subtractCount} ><Entypo name="minus" size={20} color="black" /></TouchableOpacity>
-                                        <Text style={{ width: 20, textAlign: 'center' }} >{count}</Text>
-                                        <TouchableOpacity onPress={plusCount} ><Entypo name="plus" size={20} color="black" /></TouchableOpacity>
-                                    </View>)
-                                    : <View style={styles.amountBtnHidden} ></View>
-                                }
-                                {/* </> */}
                             </View>
-                        </View>
 
-                    </View>
+                        </View>
+                    {/* ))} */}
 
                 </ScrollView>
 
                 <View style={styles.navbarBotContainer} >
 
-                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-                        Total: {totalPrice}$
-                    </Text>
+                    {isChecked === false
+                        ? (<Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                            Total:
+                        </Text>)
+                        : (<Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                            Total: {totalPrice}$
+                        </Text>)
+                    }
 
                     <TouchableOpacity  >
                         <LinearGradient

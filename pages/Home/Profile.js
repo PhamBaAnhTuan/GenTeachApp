@@ -7,7 +7,8 @@ import {
 	View,
 	Image,
 	ScrollView,
-	Alert
+	Alert,
+	ToastAndroid
 } from "react-native";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
@@ -29,10 +30,11 @@ const Profile = ({ navigation }) => {
 	const signOutMethod = async () => {
 		try {
 			await auth.signOut();
-			Alert.alert("Sign out", "Signed out successfully");
 			console.log("User signed out");
 			// Navigation
 			navigation.navigate("GetStart");
+			// Show notification
+			ToastAndroid.show('Signed out successfully', ToastAndroid.LONG);
 			// set state
 			setIsSignedIn(false);
 			setUser('');
@@ -63,11 +65,12 @@ const Profile = ({ navigation }) => {
 					</View>
 				</View>
 
-				<ScrollView>
+				<ScrollView showsVerticalScrollIndicator={false}>
 					<View style={styles.profileImgContainer}>
 						<Image
 							style={styles.profileImg}
-							source={require("../../assets/Profile/imgProfile.png")}
+							source={require("../../assets/background/bgImg.png")}
+							resizeMode="center"
 						/>
 
 						<View>
@@ -93,81 +96,74 @@ const Profile = ({ navigation }) => {
 
 					<View style={{ height: 700 }}>
 						<View style={styles.settingContainer}>
-							<TouchableOpacity>
-								<SettingCard
-									name="Followers"
-									icon={<Fontisto name="persons" size={24} color="black" />}
-								/>
-							</TouchableOpacity>
 
-							<TouchableOpacity>
-								<SettingCard
-									name="Following"
-									icon={<Fontisto name="person" size={24} color="black" />}
-								/>
-							</TouchableOpacity>
+							<SettingCard
+								onPress={null}
+								name="Followers"
+								icon={<Fontisto name="persons" size={24} color="black" />}
+							/>
 
-							<TouchableOpacity>
-								<SettingCard
-									name="Post"
-									icon={<Entypo name="documents" size={24} color="black" />}
-								/>
-							</TouchableOpacity>
+							<SettingCard
+								onPress={null}
+								name="Following"
+								icon={<Fontisto name="person" size={24} color="black" />}
+							/>
 
-							<TouchableOpacity>
-								<SettingCard
-									name="Order"
-									icon={<AntDesign name="shoppingcart" size={24} color="black" />}
-								/>
-							</TouchableOpacity>
+							<SettingCard
+								onPress={null}
+								name="Post"
+								icon={<Entypo name="documents" size={24} color="black" />}
+							/>
 
-							<TouchableOpacity>
-								<SettingCard
-									name="Saved"
-									icon={<Feather name="bookmark" size={24} color="black" />}
-								/>
-							</TouchableOpacity>
+							<SettingCard
+								onPress={null}
+								name="Order"
+								icon={<AntDesign name="shoppingcart" size={24} color="black" />}
+							/>
 
-							<TouchableOpacity>
-								<SettingCard
-									name="Favorite"
-									icon={<AntDesign name="staro" size={24} color="black" />}
-								/>
-							</TouchableOpacity>
+							<SettingCard
+								onPress={null}
+								name="Saved"
+								icon={<Feather name="bookmark" size={24} color="black" />}
+							/>
 
-							<TouchableOpacity>
-								<SettingCard
-									name="Upgrade your account"
-									icon={ <FontAwesome5 name="angle-double-up" size={24} color="black" /> }
-								/>
-							</TouchableOpacity>
+							<SettingCard
+								onPress={null}
+								name="Favorite"
+								icon={<AntDesign name="staro" size={24} color="black" />}
+							/>
+
+							<SettingCard
+								onPress={() => navigation.navigate('UpGradeAccountDetail')}
+								name="Upgrade your account"
+								icon={<FontAwesome5 name="angle-double-up" size={24} color="gold" />}
+							/>
 						</View>
 
 						<View style={styles.moreContainer}>
-							<TouchableOpacity>
-								<SettingCard
-									name="About Us"
-									icon={<Ionicons name="information-circle-outline" size={24} color="black" />}
-								/>
-							</TouchableOpacity>
-							<TouchableOpacity>
-								<SettingCard
-									name="Feed back"
-									icon={<AntDesign name="exclamation" size={24} color="black" />}
-								/>
-							</TouchableOpacity>
-							<TouchableOpacity>
-								<SettingCard
-									name="Help and Support"
-									icon={<AntDesign name="staro" size={24} color="black" />}
-								/>
-							</TouchableOpacity>
-							<TouchableOpacity onPress={signOutMethod}>
-								<SettingCard
-									name="Sign out"
-									icon={<AntDesign name="logout" size={24} color="red" />}
-								/>
-							</TouchableOpacity>
+
+							<SettingCard
+								onPress={() => Alert.alert('About us', 'Access Genteach.gdgt.edu.vn for more!')}
+								name="About Us"
+								icon={<Ionicons name="information-circle-outline" size={24} color="black" />}
+							/>
+
+							<SettingCard
+								name="Feed back"
+								icon={<AntDesign name="exclamation" size={24} color="black" />}
+							/>
+
+							<SettingCard
+								name="Help and Support"
+								icon={<Ionicons name="help" size={24} color="black" />}
+							/>
+
+							<SettingCard
+								onPress={signOutMethod}
+								name="Sign out"
+								icon={<AntDesign name="logout" size={24} color="red" />}
+							/>
+
 						</View>
 					</View>
 				</ScrollView>

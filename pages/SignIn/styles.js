@@ -1,9 +1,9 @@
-import { StyleSheet, Platform, StatusBar } from "react-native";
+import { StyleSheet, Platform, StatusBar, Dimensions } from "react-native";
 
 const styles = StyleSheet.create({
 	safeView: {
-		height: "100%",
-		width: "100%",
+		height: Dimensions.get('screen').height,
+		width: Dimensions.get('screen').width,
 		flex: 1,
 		// alignItems: "center",
 		paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 	},
 	// Title
 	signInTitleContainer:{
-		height: '25%',
+		height: 200,
 		width: '100%',
 		alignItems: "center",
 		justifyContent: "center",
@@ -24,13 +24,16 @@ const styles = StyleSheet.create({
 	signInTitle: {
 		fontSize: 50,
 		fontWeight: "bold",
+		// color: 'white',
 	},
+
+	// Form
 	formContainer:{
-		height: '30%',
-        width: '100%',
-        alignItems: "center",
-        justifyContent: "center",
-        // borderWidth: 1
+		height: 170,
+		width: '100%',
+		alignItems: "center",
+		// justifyContent: "center",
+		// borderWidth: 1
 	},
 	clickText: {
 		fontSize: 12,
@@ -38,10 +41,10 @@ const styles = StyleSheet.create({
 		opacity: 0.7,
 		textDecorationLine: 'underline',
 	},
-	// Form
+
 	textInput: {		
 		borderWidth: 1,
-		borderRadius: 20,
+		borderRadius: 30,
 		height: 60,
 		width: 300,
 		paddingLeft: 25,
@@ -52,11 +55,11 @@ const styles = StyleSheet.create({
 	passInputContainer:{
 		height: 60,
 		width: 300,
-        flexDirection: 'row',
-        alignItems: "center",
-        justifyContent: 'space-between',
-        borderWidth: 1,
-		borderRadius: 20,
+		flexDirection: 'row',
+		alignItems: "center",
+		justifyContent: 'space-between',
+		borderWidth: 1,
+		borderRadius: 30,
 		fontSize: 15,
 		// fontWeight: "400",
 		paddingLeft: 25,
@@ -67,30 +70,43 @@ const styles = StyleSheet.create({
 		width: 220,
 		// borderWidth: 1
 	},
-	signInBtnContainer:{
-		height: '25%',
-		width: '100%',
-        alignItems: "center",
-		justifyContent: 'center',
-		// borderWidth: 1
-	},
 	fgPassContainer:{
 		width: '75%',
 		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'space-between'
+		justifyContent: 'space-between',
+		// borderWidth: 1
 	},
+
+	signInBtnContainer:{
+		height: 70,
+		width: '100%',
+		alignItems: "center",
+		marginTop: 100,
+		// borderWidth: 1
+	},
+
 	signInBtn: {
 		// backgroundColor: "#66abcd",
 		paddingHorizontal: 120,
 		paddingVertical: 20,
-		borderRadius: 15,
-		marginVertical: 10,
+		borderRadius: 30,
+		// marginVertical: 10,
+		// borderWidth: 1
+	},
+
+	orTextContainer:{
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "space-around",
+		// marginTop: 50,
+		// borderWidth: 1
 	},
 	icon: {
 		marginHorizontal: 50,
 		marginVertical: 10,
 	},
+
 	notMbText: {
 		fontSize: 14,
 		fontWeight: "700",
@@ -99,7 +115,7 @@ const styles = StyleSheet.create({
 	},
 	signUpText: {
 		fontSize: 14,
-		fontWeight: "700",
+		fontWeight: "bold",
 		color: "plum",
 		marginTop: 15,
 	},

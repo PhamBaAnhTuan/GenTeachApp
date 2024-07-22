@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, initializeAuth, getReactNativePersistence } from "@firebase/auth";
+import { initializeAuth, getReactNativePersistence } from "@firebase/auth";
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 import { getDatabase } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
@@ -7,6 +7,7 @@ import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyAhWBga8TJf6Uarx4rTXBA_eaKngQsrvjA",
   authDomain: "genteach-e387f.firebaseapp.com",
+  databaseURL: 'https://genteach-e387f-default-rtdb.asia-southeast1.firebasedatabase.app',
   projectId: "genteach-e387f",
   storageBucket: "genteach-e387f.appspot.com",
   messagingSenderId: "71609285255",
@@ -16,9 +17,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const FIREBASE_APP = initializeApp(firebaseConfig);
-// export const FIREBASE_AUTH = getAuth(FIREBASE_APP);
+
 export const FIREBASE_AUTH = initializeAuth(FIREBASE_APP, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage)
 });
+
 export const FIREBASE_DATA = getDatabase();
 export const FIREBASE_FIRESTORE = getFirestore(FIREBASE_APP);

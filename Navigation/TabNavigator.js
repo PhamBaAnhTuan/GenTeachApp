@@ -2,9 +2,6 @@ import { Image, TouchableOpacity } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 
-import Screen1 from "../pages/Shop/Screen1";
-import Screen2 from "../pages/Shop/Screen2";
-import Screen3 from "../pages/Shop/Screen3";
 import Shop from "../pages/Shop/Shop";
 
 import Home from "../pages/Home/Home";
@@ -13,7 +10,7 @@ import Edu from "../pages/Edu/Edu";
 import PodcastList from "../pages/PodCast/PodcastList";
 
 import { Ionicons } from "@expo/vector-icons";
-import ChatList from "../pages/Chat/ChatList";
+import ChatList from "../pages/Chat/ChatExpert/ChatList";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,73 +19,71 @@ const TabNavigator = ({ navigation }) => {
 		// <NavigationContainer>
 		<Tab.Navigator
 			initialRouteName="Home"
+			// headerShown={false}
 			screenOptions={({ route }) => ({
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
 					if (route.name === "Home") {
 						[iconName, color, size] = focused
-							? ['home', '#867edb', 35]
+							? ['home', '#fff', 30]
 							: ['home-outline', 'grey', 21];						
 					} else if (route.name === "Shop") {
 						[iconName, color, size] = focused
-							? ['cart', '#867edb', 35]
+							? ['cart', '#fff', 30]
 							: ['cart-outline', 'grey', 21];	
 					} else if (route.name === "Chat") {
 						[iconName, color, size] = focused
-							? ['chatbox', '#867edb', 35]
-							: ['chatbox-outline', 'grey', 21];	
+							? ['chatbubble-sharp', '#fff', 30]
+							: ['chatbubble-outline', 'grey', 21];	
 					} else if (route.name === "Edu") {
 						[iconName, color, size] = focused
-							? ['book', '#867edb', 35]
+							? ['book', '#fff', 30]
 							: ['book-outline', 'grey', 21];	
 					} else if (route.name === "Podcast") {
 						[iconName, color, size] = focused
-							? ['headset', '#867edb', 35]
+							? ['headset', '#fff', 30]
 							: ['headset-outline', 'grey', 21];	
 					}
 					// You can return any React element here, including custom icons
 					return <Ionicons name={iconName} size={size} color={color}  />;
 				},
+				headerShown: false,
 				tabBarActiveTintColor: "#867edb",
 				tabBarInactiveTintColor: "plum",
 				headerBackgroundContainerStyle: "transparent",
 				tabBarLabelStyle: {
-					fontWeight: "bold",
+					// fontWeight: "bold",
+					fontSize: 0,
+					// paddingBottom: 5
 				},
 				tabBarStyle: {
 					backgroundColor: "plum",
 					color: 'plum',
-					height: 60,
-					paddingTop: 10,
-					// borderTopStartRadius: 20,
-					// borderTopRightRadius: 20
+					height: 65,
+					paddingBottom: 10,
 				},
+				// tabBarActiveBackgroundColor: 'green'
 			})}
 		>
 			<Tab.Screen
 				name="Chat"
-				component={ChatList}
-				options={{ headerShown: false }}
+				component={Chat}
 			/>
 			<Tab.Screen
 				name="Shop"
 				component={Shop}
-				options={{ headerShown: false }}
 			/>
 			<Tab.Screen
 				name="Home"
 				component={Home}
-				options={{ headerShown: false }}
 			/>
 			<Tab.Screen
 				name="Edu"
 				component={Edu}
-				options={{ headerShown: false }}
 			/>
 			<Tab.Screen
 				name="Podcast"
 				component={PodcastList}
-				options={{ headerShown: false }}
 			/>
 		</Tab.Navigator>
 		// </NavigationContainer>

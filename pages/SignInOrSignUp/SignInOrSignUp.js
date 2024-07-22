@@ -21,7 +21,7 @@ const SignInOrSignUp = ({navigation}) => {
                             end={{ x: 1, y: 0.5 }} 
                             style={styles.btn}
                         >
-                            <Text style={{fontSize: 15, fontWeight: 'bold'}}>Sign In</Text>
+                            <Text style={{fontSize: 15, fontWeight: 'bold', color: 'white'}}>Sign In</Text>
                         </LinearGradient>
                     </TouchableOpacity>
 
@@ -31,7 +31,7 @@ const SignInOrSignUp = ({navigation}) => {
                             end={{ x: 1, y: 0.5 }} 
                             style={styles.btn}
                         >
-                            <Text style={{fontSize: 15, fontWeight: 'bold'}}>Sign Up</Text>
+                            <Text style={{fontSize: 15, fontWeight: 'bold', color: 'white'}}>Sign Up</Text>
                         </LinearGradient>
                     </TouchableOpacity>
 

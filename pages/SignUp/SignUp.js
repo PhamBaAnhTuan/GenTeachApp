@@ -11,6 +11,7 @@ import {
 	ScrollView,
 	KeyboardAvoidingView,
 	Alert,
+	ToastAndroid
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
@@ -22,7 +23,7 @@ import { createUserWithEmailAndPassword } from "@firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 // Context
 import { AuthContext } from "../../Context/Context";
-import Loading from "../../Components/Loading";
+import {Loading} from "../../Components/Animation";
 
 const SignUp = ({ navigation }) => {
 
@@ -39,28 +40,29 @@ const SignUp = ({ navigation }) => {
 
 	// Sign Up Function
 	const signUpMethod = async () => {
-		if(!email && !password) {
-			Alert.alert('Invalid Sign up', 'Please enter your email and password');
-			return;
-		}if(!email){
-			Alert.alert('Invalid Sign up', 'Please enter your email');
-			return;
-		}if(!password){
-			Alert.alert('Invalid Sign up', 'Please enter your password');
+		if(!userName && !email && !password) {
+			ToastAndroid.show('Please enter full name, email and password', ToastAndroid.SHORT);
 			return;
 		}if(!userName){
-			Alert.alert('Invalid Sign up', 'Please enter your full name');
+			ToastAndroid.show('Please enter full name', ToastAndroid.SHORT);
+			return;
+		}if(!email){
+			ToastAndroid.show('Please enter email', ToastAndroid.SHORT);
+			return;
+		}if(!password){
+			ToastAndroid.show('Please enter password', ToastAndroid.SHORT);
 			return;
 		}
-
 		try {
 			setIsLoading(true);
 			const response = await createUserWithEmailAndPassword( auth, email, password);
 			setIsLoading(false);
-			Alert.alert("Notification", "Created account successfully");
-			console.log("User signed up success:", 'email:', response?.user?.email);
 			
-			navigation.navigate("SignIn");
+			console.log("User signed up success:", 'email:', response?.user?.email);
+			navigation.replace("TabNavigator");
+			// Show notification
+			ToastAndroid.show('Signed up successfully', ToastAndroid.SHORT);
+			ToastAndroid.show('Signed in successfully', ToastAndroid.SHORT);
 
 			await setDoc(doc(db, 'user', response?.user?.uid), {
 				userId: response?.user?.uid,
@@ -154,7 +156,7 @@ const SignUp = ({ navigation }) => {
 								style={{
 									fontSize: 15,
 									fontWeight: "700",
-									// color: "#fff",
+									color: "white",
 								}}
 							>
 								Sign Up
@@ -165,12 +167,7 @@ const SignUp = ({ navigation }) => {
 				</View>
 
 				<View // Other method
-					style={{
-						flexDirection: "row",
-						alignItems: "center",
-						justifyContent: "space-around",
-						// marginTop: 50,
-					}}
+					style={styles.orContainer}
 				>
 					<View
 						style={{ height: 1, width: 130, backgroundColor: "black",}} ></View>
@@ -207,7 +204,7 @@ const SignUp = ({ navigation }) => {
 				</View>
 
 				{/* Other method */}
-				<View style={{ flexDirection: "row" }}>
+				<View style={{ flexDirection: "row", marginTop: 30 }}>
 					<Text style={styles.notMbText}>Have an account? </Text>
 					<TouchableOpacity
 						onPress={() => navigation.navigate("SignIn")}

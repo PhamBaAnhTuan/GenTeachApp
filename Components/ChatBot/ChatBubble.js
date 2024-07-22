@@ -1,0 +1,60 @@
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react';
+// Icons
+import { Ionicons } from '@expo/vector-icons';
+// Context
+
+const ChatBubble = ({role, text, onSpeech}) => {
+  return (
+   <ScrollView>
+      <View style={[styles.chatContainer, role ==='user' ? styles.userChatItem : styles.modalChatItem]}>
+         <Text style={styles.chatText}>{text}</Text>
+         {role === 'model' && (
+            <TouchableOpacity style={styles.speakerIcon} onPress={onSpeech}>
+               <Ionicons name="volume-high-outline" size={24} color="black" />
+            </TouchableOpacity>
+         )}
+      </View>
+   </ScrollView>
+  )
+}
+
+export default ChatBubble;
+
+const styles = StyleSheet.create({
+   chatContainer: {
+      // height: 50,
+      maxWidth: '80%',
+      paddingHorizontal: 10,
+      paddingVertical: 5,
+      marginBottom: 3,
+      borderRadius: 15,
+      position: 'relative',
+   },
+   userChatItem: {
+      backgroundColor: 'skyblue',
+      alignSelf: 'flex-end',
+      height: 'auto',
+      maxWidth: '90%',
+      marginTop: 10,
+      marginRight: 5,
+   },
+   modalChatItem: {
+      backgroundColor: 'aliceblue',
+      alignSelf: 'flex-start',
+      height: 'auto',
+      maxWidth: '90%',
+      marginLeft: 5,
+      marginTop: 2,
+   },
+   chatText: {
+      color: 'black',
+      fontSize: 13,
+      fontWeight: 'bold'
+   },
+   speakerIcon:{
+      position: 'absolute',
+      bottom: 2,
+      right: 5
+   }
+})

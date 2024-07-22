@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { View, Text, Image, TouchableOpacity, FlatList, KeyboardAvoidingView, TextInput } from "react-native";
 import styles from "./styles";
 import { Video, ResizeMode } from "expo-av";
-import { MaterialIcons, Feather } from "@expo/vector-icons";
+import { MaterialIcons, Feather, Ionicons } from "@expo/vector-icons";
 
 export const TitleField = (props) => {
 	return (
@@ -15,7 +15,7 @@ export const TitleField = (props) => {
 	);
 };
 
-export const SearchView = () => {
+export const SearchView = (props) => {
 	return (
 		<View style={styles.searchContainer}>
 			<KeyboardAvoidingView behavior="padding">
@@ -26,7 +26,7 @@ export const SearchView = () => {
 				/>
 			</KeyboardAvoidingView>
 
-			<TouchableOpacity style={{ marginRight: 15 }}>
+			<TouchableOpacity style={{ marginRight: 15 }} onPress={props.onPress}>
 				<Feather
 					name="search"
 					size={24}
@@ -62,7 +62,7 @@ export const VideoCard = () => {
 
 export const SettingCard = (props) => {
 	return (
-		<>
+		<TouchableOpacity onPress={props.onPress}>
 			<View style={styles.settingWrap}>
 				<View style={styles.wrapLeft}>
 					<View style={{ opacity: 0.8, paddingHorizontal: 10, width: 50, alignItems: 'center' }}>{props.icon}</View>
@@ -71,43 +71,56 @@ export const SettingCard = (props) => {
 				<MaterialIcons name="keyboard-arrow-right" size={24} color="black" style={{ paddingHorizontal: 15 }} />
 			</View>
 
-			<View style={{height: 0.7, width: 320, backgroundColor: 'black', alignSelf: 'center', opacity: 0.2}}></View>
-		</>
+			<View style={{ height: 0.7, width: 310, backgroundColor: 'black', alignSelf: 'center', opacity: 0.2 }}></View>
+		</TouchableOpacity>
 	);
 };
 
-export const UpGradeCard = (props) => {
+export const ChatCard = (props) => {
 	return (
-	  <View style={styles.plusCardContainer}>
-			{/* <View style={styles.wrap1}> */}
-				 <Image
-					  style={styles.cardImg}
-					  source={props.src}
-					  resizeMode="contain"
-				 />
-			{/* </View> */}
- 
-				 <Text style={styles.title}>{props.title}</Text>
+		<View style={styles.cardContainer}>
+			<View style={styles.cardImg} >
+				{props.animation}
+			</View>
+
+			<Text style={styles.title}>{props.title}</Text>
 			<Text style={styles.text}>
-				 {props.contain}
+				{props.content}
 			</Text>
-	  </View>
+		</View>
 	)
 };
 
-export const UpGradeCardSmall = (props) => {
-	return(
-		<View style={styles.upGradeCardContainer}>
-         <View style={styles.navbarLeft}>
-				<Text style={styles.upGradeCardSaving}>
+export const UpGradeCardPlus = (props) => {
+	return (
+		<View style={styles.plusCardContainer}>
+			<View style={styles.navbarPlus}>
+				<Text style={styles.plusCardSaving}>
 					{props.title}
 				</Text>
 			</View>
 
-         <View style={styles.upGradeCardWrap}>
-         	<Text style={styles.upGradeCardMonth}>{props.month} Month</Text>
-	         <Text style={styles.upGradeCardPrice}>{props.price}$</Text>
-         </View>
-      </View>
+			<View style={styles.plusCardWrap}>
+				<Text style={styles.plusCardMonth}>{props.month} Month</Text>
+				<Text style={styles.plusCardPrice}>{props.price} VND</Text>
+			</View>
+		</View>
 	)
-}
+};
+
+export const UpGradeCardPremium = (props) => {
+	return (
+		<View style={styles.premiumCardContainer}>
+			<View style={styles.navbarPremium}>
+				<Text style={styles.premiumCardSaving}>
+					{props.title}
+				</Text>
+			</View>
+
+			<View style={styles.premiumCardWrap}>
+				<Text style={styles.premiumCardMonth}>{props.month} Month</Text>
+				<Text style={styles.premiumCardPrice}>{props.price} VND</Text>
+			</View>
+		</View>
+	)
+};

@@ -9,27 +9,29 @@ const styles = StyleSheet.create({
     },
     // Podcast list
     podcastContainer:{
-        marginTop: 20,
-        // marginLeft: 20
+        // marginTop: 20,
+        paddingLeft: 5,
+        marginBottom: 10,
+        // borderWidth: 1
     },
     // Podcast card
-    podcastCard:{
-        height: 210,
-        width: 150,
-        // backgroundColor: 'grey',
-        borderRadius: 10,
-        margin: 10,
-        marginLeft: 10,
-        // borderWidth: 1,
-        alignItems: 'center',
-    },
-    podcastImg:{
-        alignSelf: 'center',
-        height: 100,
-        width: 50,
-        resizeMode: 'contain',
-        marginLeft: 20
-    },
+    // podcastCard:{
+    //     height: 210,
+    //     width: 150,
+    //     // backgroundColor: 'grey',
+    //     borderRadius: 10,
+    //     margin: 10,
+    //     marginLeft: 10,
+    //     // borderWidth: 1,
+    //     alignItems: 'center',
+    // },
+    // podcastImg:{
+    //     alignSelf: 'center',
+    //     height: 100,
+    //     width: 50,
+    //     resizeMode: 'contain',
+    //     marginLeft: 20
+    // },
     podcastNameWrap:{
         marginLeft: 5,
         marginTop: 10
@@ -52,10 +54,12 @@ const styles = StyleSheet.create({
         // borderWidth: 1,
     },
     podcastImg:{
-        height: 300,
-        width: 300,
-        flex: 1,
+        height: 330,
+        width: 330,
         alignSelf: 'center',
+        justifyContent: 'center',
+        // flex: 1,
+        borderRadius: 15
     },
     // Podcast name, author
     titleContainer:{
@@ -66,10 +70,12 @@ const styles = StyleSheet.create({
         // borderWidth: 1
     },
     podcastTitle:{
-        fontSize: 20,
+        // width: 230,
+        fontSize: 17,
         fontWeight: 'bold',
         alignSelf: 'center',
         textAlign: 'center',
+        // borderWidth: 1
     },
     podcastAuth:{
         fontSize: 14,        

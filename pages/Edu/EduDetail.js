@@ -1,10 +1,13 @@
-import { SafeAreaView, Text, View, Image, ScrollView, TouchableOpacity } from "react-native";
+import { SafeAreaView, Text, View, Image, ScrollView, TouchableOpacity, ToastAndroid } from "react-native";
 import React, { useState } from "react";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
-// import { useNavigation } from '@react-navigation/native';
+// Route get params
+import { useRoute } from "@react-navigation/native";
 // Icon
-import { Ionicons, Entypo } from "@expo/vector-icons";
+import { Ionicons, Entypo, MaterialIcons } from "@expo/vector-icons";
+// Component
+import { ItemShopDetail } from "../../Components/ItemShopDetail";
 
 const EduDetail = ({ navigation }) => {
 
@@ -12,9 +15,14 @@ const EduDetail = ({ navigation }) => {
 	const [opacity, setOpacity] = useState(1);
 
 	const handleFollow = () =>{
-		follow === 'Follow' ? setFollow('Unfollow') : setFollow('Follow');
+		follow === 'Follow' 
+		? (setFollow('Following'), ToastAndroid.show('Following',ToastAndroid.SHORT)) 
+		: (setFollow('Follow'), ToastAndroid.show('Unfollowed',ToastAndroid.SHORT));
 		opacity === 1 ? setOpacity(0.5) : setOpacity(1);
 	}
+
+	const route = useRoute();
+	const selectedCourse = route.params?.selectedCourse;
 	
 	return (
 		<SafeAreaView style={styles.safeView}>
@@ -32,6 +40,9 @@ const EduDetail = ({ navigation }) => {
 							color="black"
 						/>
 					</TouchableOpacity>
+
+               <Text style={{fontWeight: 'bold'}}>Course</Text>
+
 					<TouchableOpacity>
 						<Entypo
 							name="dots-three-vertical"
@@ -42,50 +53,18 @@ const EduDetail = ({ navigation }) => {
 				</View>
 
 				<ScrollView>
-					<View style={{ height: 900 }}>
-						<View style={styles.container1}>
-							<Image
-								source={require("../../assets/postcard/postcard4.png")}
-								style={styles.detailImg}
-							/>
-						</View>
-
-						<View style={styles.container2}>
-							<View style={styles.wrap2Left}>
-								<Image
-									style={styles.authorImg}
-									source={require("../../assets/Profile/imgProfile.png")}
-								/>
-								<Text>Author name</Text>
-							</View>
-
-							<TouchableOpacity style={styles.flBtn} onPress={handleFollow}>
-								<Text style={{opacity}}>{follow}</Text>
-							</TouchableOpacity>
-						</View>
-
-						<View style={styles.container3}>
-							<Text style={{ fontSize: 20, fontWeight: "bold" }}>Course name</Text>
-							<Text style={{ textAlign: "justify", fontSize: 12 }}>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-								industry's standard dummy text ever since the 1500s
-							</Text>
-						</View>
-						<View style={styles.container3}>
-							<Text style={{ fontSize: 20, fontWeight: "bold" }}>Target</Text>
-							<Text style={{ textAlign: "justify", fontSize: 12 }}>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-								industry's standard dummy text ever since the 1500s
-							</Text>
-						</View>
-						<View style={styles.container3}>
-							<Text style={{ fontSize: 20, fontWeight: "bold" }}>Roadmap</Text>
-							<Text style={{ textAlign: "justify", fontSize: 12 }}>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-								industry's standard dummy text ever since the 1500s
-							</Text>
-						</View>
-					</View>
+					{/* img item */}
+					<ItemShopDetail img={selectedCourse.img}
+						name={selectedCourse.name}
+						author={selectedCourse.author}
+						handleFollow={handleFollow}
+						opacity={opacity}
+						follow={follow}
+						price={selectedCourse.price}
+						description={selectedCourse.description}
+						discount={selectedCourse.discount}
+						rate={selectedCourse.rate}
+					/>
 				</ScrollView>
 
 				<View style={styles.navbarBot}>
@@ -96,7 +75,7 @@ const EduDetail = ({ navigation }) => {
 							end={{ x: 1, y: 0.5 }}
 							style={styles.buyBtn}
 						>
-							<Text style={{ fontWeight: "bold", fontSize: 12 }}>Buy</Text>
+							<Text style={{ fontWeight: "bold", fontSize: 13, color: 'white' }}>Buy</Text>
 						</LinearGradient>
 					</TouchableOpacity>
 
@@ -107,7 +86,7 @@ const EduDetail = ({ navigation }) => {
 							end={{ x: 1, y: 0.5 }}
 							style={styles.buyBtn}
 						>
-							<Text style={{ fontWeight: "bold", fontSize: 12 }}>Try free for 2 lesson</Text>
+							<Text style={{ fontWeight: "bold", fontSize: 13, color: 'white' }}>Try free for 2 lesson</Text>
 						</LinearGradient>
 					</TouchableOpacity>
 				</View>

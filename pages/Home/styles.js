@@ -1,28 +1,153 @@
-import { StyleSheet, Platform, StatusBar } from "react-native";
+import { StyleSheet, Platform, StatusBar, Dimensions } from "react-native";
+import { AuthContext } from "../../Context/Context";
 
 const styles = StyleSheet.create({
     safeView: {
-        height: '100%',
-        width: '100%',
+        height: Dimensions.get('screen').height,
+        width: Dimensions.get('screen').width,
         flex: 1,
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     },
     gradient:{
         height: '100%',
         width: '100%',
-        // alignItems: 'center',
-        // justifyContent: 'center',
     },
 
+
+    personIcon:{
+        position: 'absolute',
+        right: 10,
+        top: 10,
+        alignSelf: 'flex-end',
+        justifyContent: 'center',
+        height: 30,
+        width: 30
+    },
     navbarHome: {
-        height: '7%',
+        height: 50,
         width: '100%',
-        // marginTop: 15,
         flexDirection: "row",
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
         alignItems: "center",
+        borderWidth: 0.2,
+        // marginBottom: 20
+    },
+
+    videoContainer:{
+        height: 'auto',
+        width: 'auto',
+
+    },
+
+    navbarInterAct:{
+        height: 220,
+        width: 60,
+        // borderWidth: 1,
+        position: 'absolute',
+        bottom: 35,
+        right: 0,
+        alignItems: 'center',
+        justifyContent: 'space-around'
+    },
+    likeWrap:{
+        height: 30,
+        width: 30,
+        // borderWidth: 1,
+        // borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    text1:{
+        fontSize: 10,
+        fontWeight: 'bold',
+        color: 'white',
+        // paddingTop: 5
+    },
+
+    captionContainer:{
+        height: 80,
+        width: 300,
+        // borderWidth: 1,
+        position: 'absolute',
+        left: 0,
+        bottom: 35,
+        paddingLeft: 10
+    },
+
+    in4Wrap:{
+        height: '50%',
+        width: 260,
+        // borderWidth: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+
+    avtWrap:{
+        height: '100%',
+        width: 140,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
         // borderWidth: 1
     },
+    avt:{
+        height: 40,
+        width: 40,
+        borderRadius: 30,
+        // borderWidth: 1,
+    },
+
+    flWrap:{
+        height: 25,
+        width: 75,
+        borderWidth: 0.7,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderColor: 'white'
+    },
+
+    captionWrap:{
+        height: '50%',
+        width: '100%',
+        // borderWidth: 1,
+        flexDirection: 'row',
+        paddingLeft: 10,
+        alignItems: 'center',
+    },
+
+    musicWrap:{
+        height: 30,
+        width: '100%',
+        // borderWidth: 1,
+        position: 'absolute',
+        bottom: 0,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 10,
+        // marginBottom: 5
+    },
+    musicBox:{
+        height: '100%',
+        width: 'auto',
+        borderWidth: 1,
+        borderRadius: 30,
+        borderColor: 'white',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        paddingHorizontal: 20
+    },
+    musicImg:{
+        height: '100%',
+        width: 30,
+        borderWidth: 3,
+        borderRadius: 7,
+        borderColor: 'lightgrey',
+    },
+
 
     img: {
         height: 60,
@@ -39,7 +164,8 @@ const styles = StyleSheet.create({
     navbarRight: {
         flexDirection: "row",
         alignItems: "center",
-        marginHorizontal: 25
+        marginHorizontal: 25,
+        // borderWidth: 1
     },
     // sign out btn
     signOutBtn: {
@@ -48,6 +174,7 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		// marginVertical: 10,
     },
+
     // Profile
     navbarProfile:{
         height: '7%',
@@ -56,7 +183,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 20,
-        borderWidth: 1
+        // borderWidth: 1
     },
     navbarProfileRight:{
         flexDirection: 'row',
@@ -72,7 +199,8 @@ const styles = StyleSheet.create({
     profileImg:{
         height: 80,
         width: 80,
-        marginRight: 10
+        marginRight: 10,
+        borderWidth: 1
     },
     in4Container:{
         height: '10%',
@@ -91,10 +219,11 @@ const styles = StyleSheet.create({
     },
     text:{
         fontSize: 12,
-        opacity: 0.7
+        opacity: 0.7,
+        // color: 'white'
     },
     settingContainer:{
-        height: 390,
+        height: 'auto',
         width: '95%',
         // backgroundColor: '#f1eef5',
         borderWidth: 0.5,
@@ -120,7 +249,7 @@ const styles = StyleSheet.create({
     },
     // 
     moreContainer:{
-        height: 223,
+        height: 'auto',
         width: '95%',
         marginTop: 20,
         borderWidth: 0.5,
@@ -130,6 +259,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
         borderRadius: 10
     },
+
     // Up grade account
     container:{
         height: '100%',
@@ -138,6 +268,7 @@ const styles = StyleSheet.create({
         // paddingTop: 10,
         // borderWidth: 1
     },
+
     // Up grade account Detail
 
     // Plus screen
@@ -172,18 +303,19 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30
     },
 
-    container2:{
-        height: 400,
+    containerPlus:{
+        height: 350,
         marginHorizontal: 10
         // paddingHorizontal: 20
     },
     benefitText:{
         fontSize: 30,
         fontWeight: 'bold',
-        marginTop: 20
+        marginTop: 20,
+        marginHorizontal: 10
     },
-    benefitWrap:{
-        height: '70%',
+    benefitPlusWrap:{
+        height: '80%',
         borderRadius: 15,
         borderWidth: 1
     },
@@ -192,16 +324,46 @@ const styles = StyleSheet.create({
         height: '10%',
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 1
+        backgroundColor: 'plum',
+        // borderWidth: 1
     },
-    upGradeBtn:{
-        height: 60,
-        width: 300,
+    upGradePlusBtn:{
+        height: 50,
+        width: 250,
         borderRadius: 30,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#b07cff'
-    }
+    },
+
+    // Premium screen
+    title3:{
+        height: 30,
+        width: 100,
+        backgroundColor: 'gold',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+        marginLeft: 10
+    },
+    containerPre:{
+        height: 460,
+        marginHorizontal: 10
+        // paddingHorizontal: 20
+    },
+    benefitPreWrap:{
+        height: '85%',
+        borderRadius: 15,
+        borderWidth: 1
+    },
+    upGradePreBtn:{
+        height: 50,
+        width: 250,
+        borderRadius: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'gold'
+    },
 });
 
 export default styles;

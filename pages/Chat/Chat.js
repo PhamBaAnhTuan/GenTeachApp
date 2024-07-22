@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styles from "./styles";
 import {
 	View,
@@ -6,11 +6,33 @@ import {
 	SafeAreaView,
 	Image,
 	TouchableOpacity,
+	ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-// import ChatDetail from './ChatDetail';
+// Lottie
+import LottieView from "lottie-react-native";
+// Component
+import { ChatCard } from "../../Components/Components";
+import { AI, Expert } from "../../Components/Animation";
+import PodcastCard from "../../Components/PodcastCard";
+// Icons
+import { AntDesign } from '@expo/vector-icons';
+// Context
+import { ExpertContext } from '../../Context/Context';
 
 const Chat = ({ navigation }) => {
+	const { sexualExpert, dermatologistExpert, mentalHealthExpert } = useContext(ExpertContext);
+
+	// 
+	const [isVisible, setIsVisible] = useState(true);
+	useEffect(() => {
+		const timerId = setInterval(() => {
+			setIsVisible(!isVisible);
+		}, 3000);
+		// setIsVisible(isVisible);
+		return () => clearInterval(timerId);
+	}, []);
+
 	return (
 		<SafeAreaView style={styles.safeView}>
 			<LinearGradient
@@ -19,31 +41,95 @@ const Chat = ({ navigation }) => {
 				start={{ x: 0, y: 0.5 }}
 				end={{ x: 0.5, y: 1 }}
 			>
-				<Image
-					source={require("../../assets/background/bgChat.png")}
-					resizeMode="contain"
-				></Image>
-				<TouchableOpacity
-					style={{ marginTop: 100 }}
-					onPress={() => navigation.navigate("ChatList")}
-				>
-					<LinearGradient
-						colors={["#3AABBB", "#B689E2"]}
-						start={{ x: 0, y: 0.5 }}
-						end={{ x: 1, y: 0.5 }}
-						style={styles.btn}
-					>
-						<Text
-							style={{
-								fontSize: 20,
-								fontWeight: "700",
-								color: "#fff",
-							}}
-						>
-							Let's chat
-						</Text>
-					</LinearGradient>
+
+				<ScrollView showsVerticalScrollIndicator={false}>
+					<View style={styles.titleContainer}>
+						<Text style={styles.title}>Welcome to GenChat!</Text>
+						<Text>You have 5 times to chat free, Check it out!</Text>
+						{/* <Text>Check it out</Text> */}
+					</View>
+
+
+					<View style={styles.container1}>
+						<View style={styles.titleWrap}>
+							<Text style={styles.text1}>
+								Sexual health expert
+							</Text>
+						</View>
+
+						<View style={styles.cardWrap}>
+							<ScrollView horizontal={true}>
+								{sexualExpert.map((item, index) => (
+									<PodcastCard
+										onPress={() => navigation.navigate('ChatDetail', { selectedExpert: sexualExpert[index] })}
+										key={index}
+										img={item.img}
+										name={item.role}
+										author={item.name}
+										star={item.star}
+										icon={<AntDesign name="star" size={15} color="gold" />}
+									/>
+								))}
+							</ScrollView>
+						</View>
+					</View>
+
+
+					<View style={styles.container1}>
+						<View style={styles.titleWrap}>
+							<Text style={styles.text1}>
+								Dermatologist expert
+							</Text>
+						</View>
+
+						<View style={styles.cardWrap}>
+							<ScrollView horizontal={true}>
+								{dermatologistExpert.map((item, index) => (
+									<PodcastCard
+										onPress={() => navigation.navigate('ChatDetail', { selectedExpert: dermatologistExpert[index] })}
+										key={index}
+										img={item.img}
+										name={item.role}
+										author={item.name}
+										star={item.star}
+										icon={<AntDesign name="star" size={15} color="gold" />}
+									/>
+								))}
+							</ScrollView>
+						</View>
+					</View>
+
+
+					<View style={styles.container1}>
+						<View style={styles.titleWrap}>
+							<Text style={styles.text1}>
+								Mental Health expert
+							</Text>
+						</View>
+
+						<View style={styles.cardWrap}>
+							<ScrollView horizontal={true}>
+								{mentalHealthExpert.map((item, index) => (
+									<PodcastCard
+										onPress={() => navigation.navigate('ChatDetail', { selectedExpert: mentalHealthExpert[index] })}
+										key={index}
+										img={item.img}
+										name={item.role}
+										author={item.name}
+										star={item.star}
+										icon={<AntDesign name="star" size={15} color="gold" />}
+									/>
+								))}
+							</ScrollView>
+						</View>
+					</View>
+
+				</ScrollView>
+				<TouchableOpacity style={styles.aiContainer} onPress={() => navigation.navigate('ChatAI')}>
+					<AI />
+					{isVisible && <Text style={styles.aiText}>Hi! I'm GenTech, How can I help you</Text>}
 				</TouchableOpacity>
+
 			</LinearGradient>
 		</SafeAreaView>
 	);

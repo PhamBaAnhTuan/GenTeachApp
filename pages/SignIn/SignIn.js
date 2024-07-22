@@ -9,6 +9,7 @@ import {
 	TextInput,
 	KeyboardAvoidingView,
 	Alert,
+	ToastAndroid
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
@@ -22,9 +23,13 @@ import { doc, getDoc } from "firebase/firestore";
 // Context
 import { AuthContext } from "../../Context/Context";
 // Component
-import Loading from "../../Components/Loading";
+import {Loading} from "../../Components/Animation";
+// Router
+import { useRouter } from "expo-router";
 
 const SignIn = ({ navigation }) => {
+
+	// const router = useRouter();
 
 	const { isSignedIn, setIsSignedIn, user, setUser, isLoading, setIsLoading } = useContext(AuthContext);
 	const auth = FIREBASE_AUTH;
@@ -38,13 +43,13 @@ const SignIn = ({ navigation }) => {
 	// Sign in method
 	const signInMethod = async () => {
 		if(!email && !password) {
-			Alert.alert('Invalid Sign in', 'Please enter your email and password');
+			ToastAndroid.show('Please enter email and password', ToastAndroid.SHORT);
 			return;
 		}if(!email){
-			Alert.alert('Invalid Sign in', 'Please enter your email');
+			ToastAndroid.show('Please enter email', ToastAndroid.SHORT);
 			return;
 		}if(!password){
-			Alert.alert('Invalid Sign in', 'Please enter your password');
+			ToastAndroid.show('Please enter password', ToastAndroid.SHORT);
 			return;
 		}
 		try {
@@ -52,16 +57,19 @@ const SignIn = ({ navigation }) => {
 			const response = await signInWithEmailAndPassword(auth, email, password);
 			setIsLoading(false);
 
-			Alert.alert("Notification", "Signed in successfully");
 			setUser(response?.user);
 			console.log('User signed in', response?.user.email);
-
-			navigation.navigate('TabNavigator');
+			
+			navigation.replace('TabNavigator');
+			// Show notification
+			ToastAndroid.show('Signed in successfully', ToastAndroid.SHORT);
+			// router.replace('TabNavigator');
 			setIsSignedIn(true);
 			console.log('is signed in:', isSignedIn);
 
 			setEmail('');
 			setPassword('');
+
 			// Get user data
 			try {
 				const userRef = doc(db, "user", response?.user?.uid);
@@ -156,9 +164,7 @@ const SignIn = ({ navigation }) => {
 
 				</KeyboardAvoidingView>
 
-				<View style={styles.signInBtnContainer}>
-
-					<View style={styles.fgPassContainer}>
+				<View style={styles.fgPassContainer}>
 						<TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={handleIconCheckbox}>
 							<MaterialCommunityIcons name={check} size={24} color="black" />
 							<Text style={{fontSize: 12}}>Remember me</Text>
@@ -169,6 +175,7 @@ const SignIn = ({ navigation }) => {
 						</TouchableOpacity>
 					</View>
 
+				<View style={styles.signInBtnContainer}>
 					{isLoading
 						? (<Loading size={200} />)
 
@@ -184,7 +191,8 @@ const SignIn = ({ navigation }) => {
 								<Text
 									style={{
 										fontSize: 15,
-										fontWeight: "700",
+										fontWeight: "bold",
+										color: 'white'
 									}}
 								>
 									Sign In
@@ -192,22 +200,15 @@ const SignIn = ({ navigation }) => {
 							</LinearGradient>
 						</TouchableOpacity>
 						)}
-
-
 				</View>
 
 				<View // Other method
-					style={{
-						flexDirection: "row",
-						alignItems: "center",
-						justifyContent: "space-around",
-						// marginTop: 50,
-					}}
+					style={styles.orTextContainer}
 				>
 					<View
 						style={{
-							height: 1,
-							width: 130,
+							height: 0.7,
+							width: 125,
 							backgroundColor: "black",
 						}}
 					></View>
@@ -218,8 +219,8 @@ const SignIn = ({ navigation }) => {
 
 					<View
 						style={{
-							height: 1,
-							width: 130,
+							height: 0.7,
+							width: 125,
 							backgroundColor: "black",
 						}}
 					></View>
@@ -229,6 +230,8 @@ const SignIn = ({ navigation }) => {
 					style={{
 						flexDirection: "row",
 						alignItems: "space-between",
+						// marginVertical: 40,
+						// borderWidth: 1
 					}}
 				>
 					<TouchableOpacity onPress={null}>
@@ -245,7 +248,7 @@ const SignIn = ({ navigation }) => {
 					</TouchableOpacity>
 				</View>
 
-				<View style={{ flexDirection: "row" }}>
+				<View style={{ flexDirection: "row", marginTop: 30,  }}>
 					<Text style={styles.notMbText}>Not a member? </Text>
 					<TouchableOpacity
 						onPress={() => navigation.navigate("SignUp")}
@@ -253,6 +256,7 @@ const SignIn = ({ navigation }) => {
 						<Text style={styles.signUpText}>Sign Up</Text>
 					</TouchableOpacity>
 				</View>
+
 			</LinearGradient>
 		</SafeAreaView>
 	);

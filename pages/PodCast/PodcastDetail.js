@@ -10,8 +10,9 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
-import { useNavigation } from "@react-navigation/native";
-
+// Route get params
+import { useRoute } from "@react-navigation/native";
+// Icons
 import { AntDesign } from "@expo/vector-icons";
 import {
 	MaterialCommunityIcons,
@@ -21,9 +22,12 @@ import {
 	Feather
 } from "@expo/vector-icons";
 
-const PodcastDetail = () => {
+const PodcastDetail = ({navigation}) => {
+	const route = useRoute();
+	const selectedPodcast = route.params?.selectedPodcast;
+
 	const [iconName1, setIconName1] = useState("favorite-border");
-	const [iconName2, setIconName2] = useState("play-circle");
+	const [iconName2, setIconName2] = useState("pause-circle");
 	const [iconColor, setIconColor] = useState("black");
 
 	const onPressIcon1 = () => {
@@ -31,16 +35,15 @@ const PodcastDetail = () => {
 			iconName1 === "favorite-border" ? "favorite" : "favorite-border",
 		);
 		setIconColor(
-			iconColor === "black" ? "red" : "black",
+			iconColor === "black" ? "plum" : "black",
 		);
 	};
 	const onPressIcon2 = () => {
 		setIconName2(
-			iconName2 === "play-circle" ? "pause-circle" : "play-circle",
+			iconName2 === "pause-circle" ? "play-circle" : "pause-circle",
 		);
 	};
 
-	const navigation = useNavigation();
 
 	return (
 		<SafeAreaView style={styles.safeView}>
@@ -56,7 +59,7 @@ const PodcastDetail = () => {
 						<AntDesign name="arrowleft" size={25} color="black" />
 					</TouchableOpacity>
 					<TouchableOpacity>
-						<Text>Podcast</Text>
+						<Text style={{fontWeight: 'bold'}}>Podcast</Text>
 					</TouchableOpacity>
 					<TouchableOpacity>
 						<Entypo name="menu" size={25} color="black" />
@@ -64,10 +67,10 @@ const PodcastDetail = () => {
 				</View>
 
 
-				<View style={{ height: "50%" }}>
+				<View style={{ height: "50%", justifyContent: 'center', }}>
 					<Image
-						source={require("../../assets/postcard/postcard1.png")}
-						resizeMode="contain"
+						source={{uri: selectedPodcast.img}}
+						resizeMode="cover"
 						style={styles.podcastImg}
 					/>
 				</View>
@@ -77,8 +80,8 @@ const PodcastDetail = () => {
 						<FontAwesome6 name="share" size={24} color="black" />
 					</TouchableOpacity>
 					<View>
-						<Text style={styles.podcastTitle}>Coi mo</Text>
-						<Text style={styles.podcastAuth}>Vietcetera</Text>
+						<Text style={styles.podcastTitle}>{selectedPodcast.name}</Text>
+						<Text style={styles.podcastAuth}>{selectedPodcast.author}</Text>
 					</View>
 					<TouchableOpacity onPress={onPressIcon1}>
 						<MaterialIcons
@@ -92,7 +95,7 @@ const PodcastDetail = () => {
 
 				<View style={styles.timeLine}>
 					<View>
-						<Text style={{ fontSize: 13 }}>1:02</Text>
+						<Text style={{ fontSize: 13 }}>0:00</Text>
 					</View>
 
 					<View
@@ -103,7 +106,7 @@ const PodcastDetail = () => {
 						}}
 					></View>
 					<View>
-						<Text style={{ fontSize: 13 }}>3:44</Text>
+						<Text style={{ fontSize: 13 }}>{selectedPodcast.time}</Text>
 					</View>
 				</View>
 

@@ -1,36 +1,38 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     // Title field
-    titleContainer:{
+    titleContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        paddingHorizontal: 15,
+        marginBottom: 10
     },
-    titleText:{
+    titleText: {
         fontSize: 17,
         fontWeight: 'bold',
-        marginLeft: 20
+        // marginLeft: 20
     },
-    viewAllText:{
-        marginRight: 20,
+    viewAllText: {
+        // marginRight: 20,
         // color: 'grey',
         opacity: 0.7,
         textDecorationLine: 'underline',
     },
     // Search view
-    searchContainer:{
+    searchContainer: {
         height: '10%',
         width: '100%',
         flexDirection: "row",
         alignItems: "center",
-        alignSelf:'center',
+        alignSelf: 'center',
         justifyContent: "space-around",
         borderWidth: 1,
         borderColor: 'grey',
         // backgroundColor: 'grey',
         height: 50,
         width: 330,
-        borderRadius: 15,
+        borderRadius: 30,
         marginTop: 10
     },
     searchInput: {
@@ -41,15 +43,16 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         paddingLeft: 15,
         marginVertical: 3,
-        
+
     },
     // Video card
-    video:{
+    video: {
         height: 500,
         width: '100%'
     },
+
     // Setting card
-    settingContainer:{
+    settingContainer: {
         height: 1000,
         width: '95%',
         borderWidth: 1,
@@ -59,67 +62,65 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
         borderRadius: 10
     },
-    settingWrap:{
+    settingWrap: {
         height: 55,
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         paddingLeft: 20
         // borderWidth: 1,
     },
-    wrapLeft:{
+    wrapLeft: {
         width: 140,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
         // paddingHorizontal: 10
     },
-    name:{
+    name: {
         // fontSize: 15,
         width: 170,
         marginLeft: 20,
         textAlign: 'left',
         // borderWidth: 1
     },
-    // Up grade card
-    plusCardContainer: {
-        paddingVertical: 10
-        // borderWidth: 0.5
-	},
-	wrap1: {
-		height: 120,
-		// flexDirection: "row",
-		// justifyContent: "space-between",
-        // borderWidth: 1
-	},
-	cardImg: {
-		height: 100,
-		width: 100,
-		marginTop: 10,
-		marginLeft: 10,
-		// borderWidth: 1
-	},
-	title: {
-		fontSize: 40,
-		fontWeight: "bold",
-		textAlign: "right",
-		paddingRight: 20,
-		alignSelf: "flex-end",
-		alignContent: "center",
-		justifyContent: "center",
-		// borderWidth: 1
-	},
-	text: {
-		textAlign: "right",
-		width: '95%',
-		paddingRight: 20,
-		alignSelf: "flex-end",
-		// borderWidth: 1
-	},
 
-    // UpGradeCardSmall
-    upGradeCardContainer:{
+    // Up grade card
+    cardContainer: {
+        paddingVertical: 10,
+        marginHorizontal: 5,
+        borderWidth: 0.5,
+        // backgroundColor: 'grey',
+        borderRadius: 30
+    },
+    cardImg: {
+        height: 100,
+        width: 100,
+        marginTop: 10,
+        marginLeft: 10,
+        // borderWidth: 1
+    },
+    title: {
+        fontSize: 30,
+        fontWeight: "bold",
+        textAlign: "right",
+        paddingRight: 20,
+        alignSelf: "flex-end",
+        alignContent: "center",
+        justifyContent: "center",
+        // borderWidth: 1
+    },
+    text: {
+        textAlign: "right",
+        width: '95%',
+        paddingRight: 20,
+        alignSelf: "flex-end",
+        // borderWidth: 1
+    },
+
+    // UpGradeCardPlus
+    plusCardContainer: {
         height: 200,
         width: 160,
         borderRadius: 20,
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         marginHorizontal: 5,
     },
-    navbarLeft:{
+    navbarPlus: {
         height: 40,
         width: 100,
         backgroundColor: '#b07cff',
@@ -139,34 +140,86 @@ const styles = StyleSheet.create({
         borderBottomEndRadius: 19,
         // borderWidth: 0.5,
     },
-    upGradeCardSaving:{
+    plusCardSaving: {
         fontSize: 15,
         fontWeight: 'bold',
         color: 'white',
     },
-    upGradeCardWrap:{
+    plusCardWrap: {
         // height: '100%',
         alignItems: 'center',
         marginTop: 20,
         // borderWidth: 1
     },
-    upGradeCardMonth:{
-        fontSize: 17,
+    plusCardMonth: {
+        fontSize: 20,
         fontWeight: 'bold',
-        color: '#935cff',
+        color: '#b07cff',
         paddingTop: 10,
         // paddingHorizontal: 10,
         // borderWidth: 1
     },
-    upGradeCardPrice:{
-        fontSize: 30,
+    plusCardPrice: {
+        fontSize: 17,
         fontWeight: 'bold',
         color: 'white',
         // paddingTop: 10,
         // paddingHorizontal: 10,
         // alignSelf: 'center',
         // borderWidth: 1
-    }
+    },
+
+    // UpGradeCardPremium
+    premiumCardContainer: {
+        height: 200,
+        width: 160,
+        borderRadius: 20,
+        backgroundColor: 'goldenrod',
+        // backgroundColor: 'grey',
+        borderColor: 'gold',
+        borderWidth: 3,
+        marginHorizontal: 5,
+    },
+    navbarPremium: {
+        height: 40,
+        width: 100,
+        backgroundColor: 'gold',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderTopLeftRadius: 16,
+        borderBottomEndRadius: 19,
+        // borderWidth: 0.5,
+    },
+    premiumCardSaving: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: 'white',
+    },
+    premiumCardWrap: {
+        // height: '100%',
+        alignItems: 'center',
+        marginTop: 20,
+        // borderWidth: 1
+    },
+    premiumCardMonth: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'gold',
+        paddingTop: 10,
+        // paddingHorizontal: 10,
+        // borderWidth: 1
+    },
+    premiumCardPrice: {
+        fontSize: 17,
+        fontWeight: 'bold',
+        color: 'white',
+        // paddingTop: 10,
+        // paddingHorizontal: 10,
+        // alignSelf: 'center',
+        // borderWidth: 1
+    },
+
+    
 });
 
 export default styles;

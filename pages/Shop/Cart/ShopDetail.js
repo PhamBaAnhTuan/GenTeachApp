@@ -1,60 +1,94 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
-import { SafeAreaView, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { SafeAreaView, Text, View, Image, TouchableOpacity, ScrollView, ToastAndroid } from 'react-native'
 import styles from '../styles';
-import { useNavigation } from "@react-navigation/native";
-import { AntDesign, Feather, Entypo } from '@expo/vector-icons';
+// Route get params
+import { useRoute } from "@react-navigation/native";
+// Icon
+import { AntDesign, Feather, Entypo, MaterialIcons, Octicons, Ionicons } from '@expo/vector-icons';
+// Component
+import {ItemShopDetail} from '../../../Components/ItemShopDetail';
 
 const ShopDetail = ({ navigation }) => {
+
+    // Handle follow
+    const [follow, setFollow] = useState('Follow');
+    const handleFollow = () => {
+        follow === 'Follow' 
+		? (setFollow('Following'), ToastAndroid.show('Following',ToastAndroid.SHORT)) 
+		: (setFollow('Follow'), ToastAndroid.show('Unfollowed',ToastAndroid.SHORT));
+    }
+    // Handle add to cart
+    const [cart, setCart] = useState([]);
+    const addToCart = (selectedItem) => {
+        setCart([...cart, selectedItem]);
+        ToastAndroid.show('Added to cart', ToastAndroid.SHORT);
+        // const data = cart.map(x => x.name);
+        console.log(cart);
+    };
+    // Handle buy now
+    const handleBuyNow = () => {
+        ToastAndroid.show('Buying...', ToastAndroid.SHORT);
+        navigation.navigate('Payment', { items: cart });
+    }
+    // Handle remove item from cart
+    const removeItem = (itemId) => {
+        setCart(cart.filter(item => item.id!== itemId));
+        ToastAndroid.show('Removed from cart', ToastAndroid.SHORT);
+    }
+    // Handle increase quantity
+    const increaseQuantity = (itemId) => {
+        const itemIndex = cart.findIndex(item => item.id === itemId);
+        if (itemIndex!== -1) {
+            cart[itemIndex].quantity++;
+            setCart([...cart]);
+        }
+    }
+    // const handleAdd = () => {
+    //     ToastAndroid.show('Added to cart', ToastAndroid.SHORT);
+    // }
+    // Params
+    const route = useRoute();
+    const selectedItem = route.params?.selectedItem;
+    const data = () => {
+        console.log('selected item: ', selectedItem);
+    }
+
     return (
         <SafeAreaView style={styles.safeView}>
             <LinearGradient
                 colors={["plum", "#66ffff",]} // ["#192f6a","plum",] ["#66ffff", "#3b5998", "#192f6a"]
-                // style={{ height: "100%", width: "100%",}}
-                start={{ x: 0, y: 0.3 }}
-                end={{ x: 0.5, y: 0.7 }}
+                style={{ flex: 1}}
+                start={{ x: 0.3, y: 0.3 }}
+                end={{ x: 1, y: 1 }}
             >
 
                 <View style={styles.navbarTop} >
-                    <TouchableOpacity onPress={() => navigation.goBack()}><AntDesign name="arrowleft" size={24} color="black" /></TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <AntDesign name="arrowleft" size={24} color="black" />
+                    </TouchableOpacity>
                     <View style={{ flexDirection: 'row', width: 65, justifyContent: 'space-between' }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Cart')} ><Feather name="shopping-cart" size={22} color="black" /></TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('Cart', {cart})} ><Feather name="shopping-cart" size={22} color="black" /></TouchableOpacity>
                         <TouchableOpacity><Entypo name="dots-three-vertical" size={22} color="black" /></TouchableOpacity>
                     </View>
                 </View>
 
-                <ScrollView style={{ height: '83%' }} >
-                    {/* img item */}
-                    <View style={styles.itemImg}>
-                        <Image source={require('../../../assets/item/item1.jpg')} resizeMode='center' style={{ borderRadius: 15 }} />
-                    </View>
-
-                    <View style={{ height: 1, width: 300, backgroundColor: 'black', alignSelf: 'center' }}></View>
-
-                    {/* item in4 */}
-                    <View style={styles.nameContainer} >
-                        <Text style={styles.price} >
-                            16$
-                        </Text>
-                        <TouchableOpacity >
-                            <Text style={styles.brand} >
-                                Durex play
-                            </Text >
-                        </TouchableOpacity>
-                        <Text style={styles.item} >
-                            Durex Strawberry
-                        </Text>
-                        <Text style={styles.description} >
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        </Text>
-                    </View>
-
-                    {/* <View style={{height: 1, width: 300, backgroundColor: 'black', alignSelf: 'center'}}></View> */}
+                <ScrollView style={{ height: '83%' }} showsVerticalScrollIndicator={false} >
+                    <ItemShopDetail img={selectedItem.img}
+                        name={selectedItem.name}
+                        handleFollow={handleFollow}
+                        follow={follow}
+                        brand={selectedItem.brand || selectedItem.author}
+                        price={selectedItem.price}
+                        description={selectedItem.description}
+                        discount={selectedItem.discount}
+                        rate={selectedItem.rate}
+                    />
                 </ScrollView>
 
                 <View style={styles.navbarBotContainer} >
 
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={addToCart} >
                         <LinearGradient
                             colors={["#3AABBB", "#B689E2"]}
                             start={{ x: 0, y: 0.5 }}
@@ -63,8 +97,9 @@ const ShopDetail = ({ navigation }) => {
                         >
                             <Text
                                 style={{
-                                    // fontSize: 15,
+                                    color: 'white',
                                     fontWeight: "bold",
+                                    fontSize: 13
                                 }}
                             >
                                 Add to cart
@@ -72,7 +107,7 @@ const ShopDetail = ({ navigation }) => {
                         </LinearGradient>
                     </TouchableOpacity>
 
-                    <TouchableOpacity  >
+                    <TouchableOpacity onPress={() => navigation.navigate('Buy')} >
                         <LinearGradient
                             colors={["#3AABBB", "#B689E2"]}
                             start={{ x: 0, y: 0.5 }}
@@ -81,8 +116,9 @@ const ShopDetail = ({ navigation }) => {
                         >
                             <Text
                                 style={{
-                                    // fontSize: 15,
+                                    color: 'white',
                                     fontWeight: "bold",
+                                    fontSize: 13
                                 }}
                             >
                                 Buy now

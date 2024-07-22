@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
     courseContainer:{
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginLeft: 7,
-        marginBottom: 30
+        marginLeft: 5,
+        marginBottom: 20
     },
 
     // Edu detail
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     // navbar bot
     navbarBot:{
         height: '10%',
-        backgroundColor: '#fff0ff',
+        backgroundColor: 'plum',
         alignItems: 'center',
         justifyContent: 'space-around',
         flexDirection: 'row',
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     buyBtn:{
         height: 50,
 		width: 150,
-		borderRadius: 15,
+		borderRadius: 30,
 		alignItems: "center",
 		justifyContent: "center",
 		backgroundColor: "plum",

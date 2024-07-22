@@ -87,13 +87,18 @@ const styles = StyleSheet.create({
 	},
 	// Shop
 	banner: {
+		height: 150,
 		marginHorizontal: 6,
-		height: "20.7%",
+		// borderWidth: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
+
 	// Tab Screen
 	container: {
-		height: 1000,
-		marginTop: 30,
+		height: 'auto',
+		marginTop: 20,
+		marginBottom: 20
 	},
 	cardContainer: {
 		flexDirection: "row",
@@ -112,7 +117,7 @@ const styles = StyleSheet.create({
 	},
 
 	itemImg: {
-		height: "30%",
+		// height: 300,
 		alignItems: "center",
 		justifyContent: "center",
 		borderRadius: 15,
@@ -121,32 +126,105 @@ const styles = StyleSheet.create({
 
 	//
 	nameContainer: {
-		height: "15%",
-		paddingHorizontal: 15,
+		height: 450,
+		paddingHorizontal: 10,
+		justifyContent: 'space-evenly',
 		// borderWidth: 1
 	},
-	price: {
-		// color: 'black',
-		fontSize: 30,
-		fontWeight: "bold",
-		// textAlign: 'center',
-		marginTop: 20,
+	
+	brandContainer:{
+		height: '15%',
+		width: '100%',
+		flexDirection: "row",
+		alignItems: 'center',
+      justifyContent: "space-between",
+      marginTop: 10,
+      paddingHorizontal: 10,
+		borderRadius: 5,
+		backgroundColor: 'white',
+      // borderWidth: 1
 	},
 	brand: {
-		width: "25%",
-		marginTop: 10,
+		// width: "25%",
+		// marginTop: 10,
 		fontWeight: "bold",
 		// borderWidth: 1,
 	},
+	flBtn:{
+		height: 25,
+		width: 80,
+		alignItems: 'center',
+		justifyContent: 'center',
+		borderRadius: 5,
+		borderWidth: 1,
+		marginLeft: 20,
+		opacity: 0.7
+  },
+  
 	item: {
+		marginTop: 30,
+		marginHorizontal: 10,
 		fontSize: 25,
 		fontWeight: "bold",
+		// borderWidth: 1
+	},
+	priceContainer:{
+		height: '22%',
+      width: '100%',
+      // flexDirection: "row",
+      // alignItems: 'center',
+      justifyContent: 'center',
+      // marginTop: 5,
+      paddingHorizontal: 10,
+      borderRadius: 5,
+      backgroundColor: 'white',
+      // borderWidth: 1
+	},
+	price: {
+		// width: '30%',
+		fontSize: 20,
+		fontWeight: "bold",
+		// textAlign: 'right',
+		// marginTop: 20,
 	},
 	description: {
-		// marginTop: 5,
-		fontSize: 15,
+		// width: '70%',
+		fontSize: 13,
 		textAlign: "justify",
 		// marginLeft: 20
+	},
+	voucherContainer:{
+		height: '15%',
+      width: '100%',
+      flexDirection: "row",
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      // marginTop: 5,
+      paddingHorizontal: 10,
+      borderRadius: 5,
+      backgroundColor: 'white',
+      // borderWidth: 1
+	},
+	voucherWrap:{
+		width: 90,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		// borderWidth: 1
+	},
+	discountWrap:{
+		height: 22,
+		width: '80%',
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: 'orange',
+      // borderWidth: 1
+	},
+	cmtWrap:{
+		flexDirection: 'row', 
+		alignItems: 'center', 
+		justifyContent: 'space-between', 
+		width: 95
 	},
 
 	//
@@ -155,14 +233,14 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-around",
-		backgroundColor: '#fff0ff',
+		backgroundColor: 'plum',
 		// borderRadius: 15,
 		// borderWidth: 1
 	},
 	addBtn: {
 		height: 50,
 		width: 150,
-		borderRadius: 15,
+		borderRadius: 30,
 		alignItems: "center",
 		justifyContent: "center",
 		backgroundColor: "plum",
@@ -172,7 +250,7 @@ const styles = StyleSheet.create({
 	buyBtn: {
 		height: 50,
 		width: 150,
-		borderRadius: 15,
+		borderRadius: 30,
 		alignItems: "center",
 		justifyContent: "center",
 		backgroundColor: "plum",
@@ -181,12 +259,13 @@ const styles = StyleSheet.create({
 
 	// Cart
 	itemContainer: {
-		height: "100%",
+		height: 150,
 		width: "97%",
 		backgroundColor: "#fff0ff",
 		borderRadius: 10,
 		alignSelf: "center",
-      paddingVertical: 10
+      paddingVertical: 10,
+		// borderWidth: 1
 	},
 	itemWrap: {
 		flexDirection: "row",
@@ -212,6 +291,7 @@ const styles = StyleSheet.create({
 		width: "60%",
 		// borderWidth: 1,
 	},
+
     amountBtn:{
         height: 25,
         width: '30%',
@@ -226,7 +306,7 @@ const styles = StyleSheet.create({
         // flexDirection: 'row',
         // alignItems: 'center',
         // justifyContent: 'space-evenly',
-        // borderWidth: 0.5,
+        borderWidth: 0.5,
     },
 });
 

@@ -5,6 +5,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 // Icon
 import { Ionicons, Entypo } from '@expo/vector-icons';
+import PlusScreen from './PlusScreen';
+import PremiumScreen from './PremiumScreen';
 
 const TopTab = createMaterialTopTabNavigator();
 
@@ -18,12 +20,12 @@ const UpGradeAccountDetail = () => {
          end={{ x: 0.5, y: 1 }}
       >
 
-         <View style={{ height: "90%" }}>
+         <View style={{ height: "100%" }}>
             <TopTab.Navigator
                screenOptions={{
                   // tabBarActiveTintColor: "#e91e63",
                   tabBarLabelStyle: { fontWeight: 'bold' },
-                  swipeEnabled: false,
+                  swipeEnabled: true,
                   tabBarStyle: {
                      backgroundColor: "plum",
                   },
